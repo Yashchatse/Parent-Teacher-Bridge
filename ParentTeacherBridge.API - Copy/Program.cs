@@ -1,17 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ParentTeacherBridge.API.Data;
-using ParentTeacherBridge.API.Mapping;
 using ParentTeacherBridge.API.Repositories;
 using ParentTeacherBridge.API.Services;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-    });
+builder.Services.AddControllers();
 // ✅ Register your DbContexts before Build()
 builder.Services.AddDbContext<ParentTeacherBridgeAPIContext>(options =>
 {
@@ -40,18 +33,11 @@ builder.Services.AddDbContext<ParentTeacherBridgeAPIContext>(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
-builder.Services.AddAutoMapper(typeof(MappingProfile));
-
-
 //Admincontroller  teacher and admin repository and service
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
 builder.Services.AddScoped<ITeacherService, TeacherService>();
-builder.Services.AddScoped<ISchoolClassService, SchoolClassService>();
-builder.Services.AddScoped<ISchoolClassRepository, SchoolClassRepository>();
 
 var app = builder.Build();
 
