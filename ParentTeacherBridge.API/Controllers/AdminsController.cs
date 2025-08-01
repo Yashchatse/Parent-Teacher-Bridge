@@ -601,16 +601,18 @@ namespace ParentTeacherBridge.API.Controllers
         #endregion
 
 
+
         #region STUDENT CRUD OPERATIONS
 
         // GET: admin/Admins/students
         [HttpGet("students")]
-        public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
+        public async Task<ActionResult<IEnumerable<StudentDto>>> GetStudents()
         {
             try
             {
                 var students = await _studentService.GetAllStudentsAsync();
-                return Ok(students);
+                var studentDtos = _mapper.Map<IEnumerable<StudentDto>>(students);
+                return Ok(studentDtos);
             }
             catch (Exception ex)
             {
@@ -620,7 +622,7 @@ namespace ParentTeacherBridge.API.Controllers
 
         // GET: admin/Admins/students/5
         [HttpGet("students/{id}")]
-        public async Task<ActionResult<Student>> GetStudent(int id)
+        public async Task<ActionResult<StudentDto>> GetStudent(int id)
         {
             try
             {
@@ -636,7 +638,8 @@ namespace ParentTeacherBridge.API.Controllers
                     return NotFound($"Student with ID {id} not found");
                 }
 
-                return Ok(student);
+                var studentDto = _mapper.Map<StudentDto>(student);
+                return Ok(studentDto);
             }
             catch (Exception ex)
             {
@@ -646,7 +649,7 @@ namespace ParentTeacherBridge.API.Controllers
 
         // GET: admin/Admins/students/class/5
         [HttpGet("students/class/{classId}")]
-        public async Task<ActionResult<IEnumerable<Student>>> GetStudentsByClass(int classId)
+        public async Task<ActionResult<IEnumerable<StudentDto>>> GetStudentsByClass(int classId)
         {
             try
             {
@@ -656,7 +659,8 @@ namespace ParentTeacherBridge.API.Controllers
                 }
 
                 var students = await _studentService.GetStudentsByClassAsync(classId);
-                return Ok(students);
+                var studentDtos = _mapper.Map<IEnumerable<StudentDto>>(students);
+                return Ok(studentDtos);
             }
             catch (Exception ex)
             {
@@ -666,7 +670,7 @@ namespace ParentTeacherBridge.API.Controllers
 
         // GET: admin/Admins/students/search?term=searchTerm
         [HttpGet("students/search")]
-        public async Task<ActionResult<IEnumerable<Student>>> SearchStudents([FromQuery] string term)
+        public async Task<ActionResult<IEnumerable<StudentDto>>> SearchStudents([FromQuery] string term)
         {
             try
             {
@@ -676,7 +680,8 @@ namespace ParentTeacherBridge.API.Controllers
                 }
 
                 var students = await _studentService.SearchStudentsAsync(term);
-                return Ok(students);
+                var studentDtos = _mapper.Map<IEnumerable<StudentDto>>(students);
+                return Ok(studentDtos);
             }
             catch (Exception ex)
             {
@@ -686,37 +691,22 @@ namespace ParentTeacherBridge.API.Controllers
 
         // POST: admin/Admins/students
         [HttpPost("students")]
-        public async Task<ActionResult<Student>> CreateStudent([FromBody] Student student)
+        public async Task<ActionResult<StudentDto>> CreateStudent([FromBody] CreateStudentDto createStudentDto)
         {
             try
             {
-                if (student == null)
+                if (createStudentDto == null)
                 {
                     return BadRequest("Student data is required");
                 }
 
-                // Validate required fields
-                if (string.IsNullOrWhiteSpace(student.Name))
-                {
-                    return BadRequest("Student name is required");
-                }
-
-                if (string.IsNullOrWhiteSpace(student.EnrollmentNo))
-                {
-                    return BadRequest("Enrollment number is required");
-                }
-
-                if (!student.ClassId.HasValue || student.ClassId <= 0)
-                {
-                    return BadRequest("Valid class ID is required");
-                }
-
-                // Validate model state
+                // Model validation is handled by data annotations
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
                 }
 
+                var student = _mapper.Map<Student>(createStudentDto);
                 var result = await _studentService.CreateStudentAsync(student);
 
                 if (!result)
@@ -724,7 +714,8 @@ namespace ParentTeacherBridge.API.Controllers
                     return StatusCode(500, "Failed to create student");
                 }
 
-                return CreatedAtAction("GetStudent", new { id = student.StudentId }, student);
+                var studentDto = _mapper.Map<StudentDto>(student);
+                return CreatedAtAction("GetStudent", new { id = student.StudentId }, studentDto);
             }
             catch (InvalidOperationException ex)
             {
@@ -738,7 +729,7 @@ namespace ParentTeacherBridge.API.Controllers
 
         // PUT: admin/Admins/students/5
         [HttpPut("students/{id}")]
-        public async Task<IActionResult> UpdateStudent(int id, [FromBody] Student student)
+        public async Task<IActionResult> UpdateStudent(int id, [FromBody] UpdateStudentDto updateStudentDto)
         {
             try
             {
@@ -747,39 +738,18 @@ namespace ParentTeacherBridge.API.Controllers
                     return BadRequest("Invalid student ID");
                 }
 
-                if (student == null)
+                if (updateStudentDto == null)
                 {
                     return BadRequest("Student data is required");
                 }
 
-                // Validate required fields
-                if (string.IsNullOrWhiteSpace(student.Name))
-                {
-                    return BadRequest("Student name is required");
-                }
-
-                if (string.IsNullOrWhiteSpace(student.EnrollmentNo))
-                {
-                    return BadRequest("Enrollment number is required");
-                }
-
-                if (!student.ClassId.HasValue || student.ClassId <= 0)
-                {
-                    return BadRequest("Valid class ID is required");
-                }
-
-                // Validate model state
+                // Model validation is handled by data annotations
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
                 }
 
-                // Ensure ID consistency
-                if (student.StudentId != 0 && student.StudentId != id)
-                {
-                    return BadRequest("ID in URL does not match ID in body");
-                }
-
+                var student = _mapper.Map<Student>(updateStudentDto);
                 student.StudentId = id;
 
                 var result = await _studentService.UpdateStudentAsync(id, student);
@@ -833,12 +803,13 @@ namespace ParentTeacherBridge.API.Controllers
 
         // GET: admin/Admins/subjects
         [HttpGet("subjects")]
-        public async Task<ActionResult<IEnumerable<Subject>>> GetSubjects()
+        public async Task<ActionResult<IEnumerable<SubjectDto>>> GetSubjects()
         {
             try
             {
                 var subjects = await _subjectService.GetAllSubjectsAsync();
-                return Ok(subjects);
+                var subjectDtos = _mapper.Map<IEnumerable<SubjectDto>>(subjects);
+                return Ok(subjectDtos);
             }
             catch (Exception ex)
             {
@@ -848,7 +819,7 @@ namespace ParentTeacherBridge.API.Controllers
 
         // GET: admin/Admins/subjects/5
         [HttpGet("subjects/{id}")]
-        public async Task<ActionResult<Subject>> GetSubject(int id)
+        public async Task<ActionResult<SubjectDto>> GetSubject(int id)
         {
             try
             {
@@ -864,7 +835,8 @@ namespace ParentTeacherBridge.API.Controllers
                     return NotFound($"Subject with ID {id} not found");
                 }
 
-                return Ok(subject);
+                var subjectDto = _mapper.Map<SubjectDto>(subject);
+                return Ok(subjectDto);
             }
             catch (Exception ex)
             {
@@ -874,7 +846,7 @@ namespace ParentTeacherBridge.API.Controllers
 
         // GET: admin/Admins/subjects/search?term=searchTerm
         [HttpGet("subjects/search")]
-        public async Task<ActionResult<IEnumerable<Subject>>> SearchSubjects([FromQuery] string term)
+        public async Task<ActionResult<IEnumerable<SubjectDto>>> SearchSubjects([FromQuery] string term)
         {
             try
             {
@@ -884,7 +856,8 @@ namespace ParentTeacherBridge.API.Controllers
                 }
 
                 var subjects = await _subjectService.SearchSubjectsAsync(term);
-                return Ok(subjects);
+                var subjectDtos = _mapper.Map<IEnumerable<SubjectDto>>(subjects);
+                return Ok(subjectDtos);
             }
             catch (Exception ex)
             {
@@ -894,32 +867,22 @@ namespace ParentTeacherBridge.API.Controllers
 
         // POST: admin/Admins/subjects
         [HttpPost("subjects")]
-        public async Task<ActionResult<Subject>> CreateSubject([FromBody] Subject subject)
+        public async Task<ActionResult<SubjectDto>> CreateSubject([FromBody] CreateSubjectDto createSubjectDto)
         {
             try
             {
-                if (subject == null)
+                if (createSubjectDto == null)
                 {
                     return BadRequest("Subject data is required");
                 }
 
-                // Validate required fields
-                if (string.IsNullOrWhiteSpace(subject.Name))
-                {
-                    return BadRequest("Subject name is required");
-                }
-
-                if (string.IsNullOrWhiteSpace(subject.Code))
-                {
-                    return BadRequest("Subject code is required");
-                }
-
-                // Validate model state
+                // Model validation is handled by data annotations
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
                 }
 
+                var subject = _mapper.Map<Subject>(createSubjectDto);
                 var result = await _subjectService.CreateSubjectAsync(subject);
 
                 if (!result)
@@ -927,7 +890,8 @@ namespace ParentTeacherBridge.API.Controllers
                     return StatusCode(500, "Failed to create subject");
                 }
 
-                return CreatedAtAction("GetSubject", new { id = subject.SubjectId }, subject);
+                var subjectDto = _mapper.Map<SubjectDto>(subject);
+                return CreatedAtAction("GetSubject", new { id = subject.SubjectId }, subjectDto);
             }
             catch (InvalidOperationException ex)
             {
@@ -938,10 +902,10 @@ namespace ParentTeacherBridge.API.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-        // Complete the Subject PUT operation (this was cut off in your original code)
+
         // PUT: admin/Admins/subjects/5
         [HttpPut("subjects/{id}")]
-        public async Task<IActionResult> UpdateSubject(int id, [FromBody] Subject subject)
+        public async Task<IActionResult> UpdateSubject(int id, [FromBody] UpdateSubjectDto updateSubjectDto)
         {
             try
             {
@@ -950,34 +914,18 @@ namespace ParentTeacherBridge.API.Controllers
                     return BadRequest("Invalid subject ID");
                 }
 
-                if (subject == null)
+                if (updateSubjectDto == null)
                 {
                     return BadRequest("Subject data is required");
                 }
 
-                // Validate required fields
-                if (string.IsNullOrWhiteSpace(subject.Name))
-                {
-                    return BadRequest("Subject name is required");
-                }
-
-                if (string.IsNullOrWhiteSpace(subject.Code))
-                {
-                    return BadRequest("Subject code is required");
-                }
-
-                // Validate model state
+                // Model validation is handled by data annotations
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
                 }
 
-                // Ensure ID consistency
-                if (subject.SubjectId != 0 && subject.SubjectId != id)
-                {
-                    return BadRequest("ID in URL does not match ID in body");
-                }
-
+                var subject = _mapper.Map<Subject>(updateSubjectDto);
                 subject.SubjectId = id;
 
                 var result = await _subjectService.UpdateSubjectAsync(id, subject);
@@ -1031,12 +979,13 @@ namespace ParentTeacherBridge.API.Controllers
 
         // GET: admin/Admins/timetables
         [HttpGet("timetables")]
-        public async Task<ActionResult<IEnumerable<Timetable>>> GetTimetables()
+        public async Task<ActionResult<IEnumerable<TimetableDto>>> GetTimetables()
         {
             try
             {
                 var timetables = await _timetableService.GetAllTimetablesAsync();
-                return Ok(timetables);
+                var timetableDtos = _mapper.Map<IEnumerable<TimetableDto>>(timetables);
+                return Ok(timetableDtos);
             }
             catch (Exception ex)
             {
@@ -1046,7 +995,7 @@ namespace ParentTeacherBridge.API.Controllers
 
         // GET: admin/Admins/timetables/5
         [HttpGet("timetables/{id}")]
-        public async Task<ActionResult<Timetable>> GetTimetable(int id)
+        public async Task<ActionResult<TimetableDto>> GetTimetable(int id)
         {
             try
             {
@@ -1062,7 +1011,8 @@ namespace ParentTeacherBridge.API.Controllers
                     return NotFound($"Timetable with ID {id} not found");
                 }
 
-                return Ok(timetable);
+                var timetableDto = _mapper.Map<TimetableDto>(timetable);
+                return Ok(timetableDto);
             }
             catch (Exception ex)
             {
@@ -1072,7 +1022,7 @@ namespace ParentTeacherBridge.API.Controllers
 
         // GET: admin/Admins/timetables/class/5
         [HttpGet("timetables/class/{classId}")]
-        public async Task<ActionResult<IEnumerable<Timetable>>> GetTimetablesByClass(int classId)
+        public async Task<ActionResult<IEnumerable<TimetableDto>>> GetTimetablesByClass(int classId)
         {
             try
             {
@@ -1082,7 +1032,8 @@ namespace ParentTeacherBridge.API.Controllers
                 }
 
                 var timetables = await _timetableService.GetTimetablesByClassAsync(classId);
-                return Ok(timetables);
+                var timetableDtos = _mapper.Map<IEnumerable<TimetableDto>>(timetables);
+                return Ok(timetableDtos);
             }
             catch (Exception ex)
             {
@@ -1092,7 +1043,7 @@ namespace ParentTeacherBridge.API.Controllers
 
         // GET: admin/Admins/timetables/teacher/5
         [HttpGet("timetables/teacher/{teacherId}")]
-        public async Task<ActionResult<IEnumerable<Timetable>>> GetTimetablesByTeacher(int teacherId)
+        public async Task<ActionResult<IEnumerable<TimetableDto>>> GetTimetablesByTeacher(int teacherId)
         {
             try
             {
@@ -1102,7 +1053,8 @@ namespace ParentTeacherBridge.API.Controllers
                 }
 
                 var timetables = await _timetableService.GetTimetablesByTeacherAsync(teacherId);
-                return Ok(timetables);
+                var timetableDtos = _mapper.Map<IEnumerable<TimetableDto>>(timetables);
+                return Ok(timetableDtos);
             }
             catch (Exception ex)
             {
@@ -1112,7 +1064,7 @@ namespace ParentTeacherBridge.API.Controllers
 
         // GET: admin/Admins/timetables/weekday/Monday
         [HttpGet("timetables/weekday/{weekday}")]
-        public async Task<ActionResult<IEnumerable<Timetable>>> GetTimetablesByWeekday(string weekday)
+        public async Task<ActionResult<IEnumerable<TimetableDto>>> GetTimetablesByWeekday(string weekday)
         {
             try
             {
@@ -1121,15 +1073,9 @@ namespace ParentTeacherBridge.API.Controllers
                     return BadRequest("Weekday is required");
                 }
 
-                // Validate weekday
-                var validWeekdays = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-                if (!validWeekdays.Contains(weekday, StringComparer.OrdinalIgnoreCase))
-                {
-                    return BadRequest("Invalid weekday. Valid values are: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday");
-                }
-
                 var timetables = await _timetableService.GetTimetablesByWeekdayAsync(weekday);
-                return Ok(timetables);
+                var timetableDtos = _mapper.Map<IEnumerable<TimetableDto>>(timetables);
+                return Ok(timetableDtos);
             }
             catch (Exception ex)
             {
@@ -1139,65 +1085,28 @@ namespace ParentTeacherBridge.API.Controllers
 
         // POST: admin/Admins/timetables
         [HttpPost("timetables")]
-        public async Task<ActionResult<Timetable>> CreateTimetable([FromBody] Timetable timetable)
+        public async Task<ActionResult<TimetableDto>> CreateTimetable([FromBody] CreateTimetableDto createTimetableDto)
         {
             try
             {
-                if (timetable == null)
+                if (createTimetableDto == null)
                 {
                     return BadRequest("Timetable data is required");
                 }
 
-                // Validate required fields
-                if (!timetable.ClassId.HasValue || timetable.ClassId <= 0)
-                {
-                    return BadRequest("Valid class ID is required");
-                }
-
-                if (!timetable.SubjectId.HasValue || timetable.SubjectId <= 0)
-                {
-                    return BadRequest("Valid subject ID is required");
-                }
-
-                if (!timetable.TeacherId.HasValue || timetable.TeacherId <= 0)
-                {
-                    return BadRequest("Valid teacher ID is required");
-                }
-
-                if (string.IsNullOrWhiteSpace(timetable.Weekday))
-                {
-                    return BadRequest("Weekday is required");
-                }
-
-                // Validate weekday
-                var validWeekdays = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-                if (!validWeekdays.Contains(timetable.Weekday, StringComparer.OrdinalIgnoreCase))
-                {
-                    return BadRequest("Invalid weekday. Valid values are: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday");
-                }
-
-                if (!timetable.StartTime.HasValue)
-                {
-                    return BadRequest("Start time is required");
-                }
-
-                if (!timetable.EndTime.HasValue)
-                {
-                    return BadRequest("End time is required");
-                }
-
-                // Validate time range
-                if (timetable.StartTime >= timetable.EndTime)
-                {
-                    return BadRequest("Start time must be before end time");
-                }
-
-                // Validate model state
+                // Model validation is handled by data annotations
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
                 }
 
+                // Additional time validation
+                if (createTimetableDto.StartTime >= createTimetableDto.EndTime)
+                {
+                    return BadRequest("Start time must be before end time");
+                }
+
+                var timetable = _mapper.Map<Timetable>(createTimetableDto);
                 var result = await _timetableService.CreateTimetableAsync(timetable);
 
                 if (!result)
@@ -1205,7 +1114,8 @@ namespace ParentTeacherBridge.API.Controllers
                     return StatusCode(500, "Failed to create timetable");
                 }
 
-                return CreatedAtAction("GetTimetable", new { id = timetable.TimetableId }, timetable);
+                var timetableDto = _mapper.Map<TimetableDto>(timetable);
+                return CreatedAtAction("GetTimetable", new { id = timetable.TimetableId }, timetableDto);
             }
             catch (InvalidOperationException ex)
             {
@@ -1219,7 +1129,7 @@ namespace ParentTeacherBridge.API.Controllers
 
         // PUT: admin/Admins/timetables/5
         [HttpPut("timetables/{id}")]
-        public async Task<IActionResult> UpdateTimetable(int id, [FromBody] Timetable timetable)
+        public async Task<IActionResult> UpdateTimetable(int id, [FromBody] UpdateTimetableDto updateTimetableDto)
         {
             try
             {
@@ -1228,67 +1138,24 @@ namespace ParentTeacherBridge.API.Controllers
                     return BadRequest("Invalid timetable ID");
                 }
 
-                if (timetable == null)
+                if (updateTimetableDto == null)
                 {
                     return BadRequest("Timetable data is required");
                 }
 
-                // Validate required fields
-                if (!timetable.ClassId.HasValue || timetable.ClassId <= 0)
-                {
-                    return BadRequest("Valid class ID is required");
-                }
-
-                if (!timetable.SubjectId.HasValue || timetable.SubjectId <= 0)
-                {
-                    return BadRequest("Valid subject ID is required");
-                }
-
-                if (!timetable.TeacherId.HasValue || timetable.TeacherId <= 0)
-                {
-                    return BadRequest("Valid teacher ID is required");
-                }
-
-                if (string.IsNullOrWhiteSpace(timetable.Weekday))
-                {
-                    return BadRequest("Weekday is required");
-                }
-
-                // Validate weekday
-                var validWeekdays = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-                if (!validWeekdays.Contains(timetable.Weekday, StringComparer.OrdinalIgnoreCase))
-                {
-                    return BadRequest("Invalid weekday. Valid values are: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday");
-                }
-
-                if (!timetable.StartTime.HasValue)
-                {
-                    return BadRequest("Start time is required");
-                }
-
-                if (!timetable.EndTime.HasValue)
-                {
-                    return BadRequest("End time is required");
-                }
-
-                // Validate time range
-                if (timetable.StartTime >= timetable.EndTime)
-                {
-                    return BadRequest("Start time must be before end time");
-                }
-
-                // Validate model state
+                // Model validation is handled by data annotations
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
                 }
 
-                // Ensure ID consistency
-                if (timetable.TimetableId != 0 && timetable.TimetableId != id)
+                // Additional time validation
+                if (updateTimetableDto.StartTime >= updateTimetableDto.EndTime)
                 {
-                    return BadRequest("ID in URL does not match ID in body");
+                    return BadRequest("Start time must be before end time");
                 }
 
+                var timetable = _mapper.Map<Timetable>(updateTimetableDto);
                 timetable.TimetableId = id;
 
                 var result = await _timetableService.UpdateTimetableAsync(id, timetable);
