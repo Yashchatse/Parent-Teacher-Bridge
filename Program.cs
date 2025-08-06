@@ -6,7 +6,16 @@ using ParentTeacherBridge.API.Services;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
+
+//builder.Services.AddControllers();
 // ✅ Register your DbContexts before Build()
 builder.Services.AddDbContext<ParentTeacherBridgeAPIContext>(options =>
 {
@@ -49,15 +58,17 @@ builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IPerformanceRepository, PerformanceRepository>();
 builder.Services.AddScoped<IPerformanceService, PerformanceService>();
 
+//builder.Services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+//builder.Services.AddScoped<IAttendanceService, AttendanceService>();
+
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IEventService, EventService>();
+
+builder.Services.AddScoped<ITimetableRepository, TimetableRepository>();
+builder.Services.AddScoped<ITimetableService, TimetableService>();
 
 
-builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-    });
 
 
 

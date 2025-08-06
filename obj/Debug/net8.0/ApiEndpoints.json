@@ -173,6 +173,27 @@
   },
   {
     "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
+    "Method": "MarkAttendance",
+    "RelativePath": "teacher/Teachers/{teacherId}/attendance",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teacherId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ParentTeacherBridge.API.DTO.CreateAttendanceDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
     "Method": "GetBehaviours",
     "RelativePath": "teacher/Teachers/{teacherId}/students/{studentId}/behaviours",
     "HttpMethod": "GET",
@@ -303,6 +324,175 @@
   },
   {
     "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
+    "Method": "UpdateAttendance",
+    "RelativePath": "teacher/Teachers/attendance/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ParentTeacherBridge.API.DTO.AttendanceDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
+    "Method": "DeleteAttendance",
+    "RelativePath": "teacher/Teachers/attendance/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
+    "Method": "GetAttendanceById",
+    "RelativePath": "teacher/Teachers/attendance/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
+    "Method": "GetAttendanceByClassAndDate",
+    "RelativePath": "teacher/Teachers/attendance/class/{classId}/{date}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "date",
+        "Type": "System.DateOnly",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
+    "Method": "GetAttendanceByStudent",
+    "RelativePath": "teacher/Teachers/attendance/student/{studentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
+    "Method": "GetEvents",
+    "RelativePath": "teacher/Teachers/events",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
+    "Method": "CreateEvent",
+    "RelativePath": "teacher/Teachers/events",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventDto",
+        "Type": "EventDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
+    "Method": "GetEvent",
+    "RelativePath": "teacher/Teachers/events/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
+    "Method": "UpdateEvent",
+    "RelativePath": "teacher/Teachers/events/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "eventDto",
+        "Type": "EventDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
+    "Method": "DeleteEvent",
+    "RelativePath": "teacher/Teachers/events/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
     "Method": "GetAllStudents",
     "RelativePath": "teacher/Teachers/students",
     "HttpMethod": "GET",
@@ -377,27 +567,6 @@
   },
   {
     "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
-    "Method": "UpdatePerformance",
-    "RelativePath": "teacher/Teachers/students/performance/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "dto",
-        "Type": "ParentTeacherBridge.API.DTO.UpdatePerformanceDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
     "Method": "DeletePerformance",
     "RelativePath": "teacher/Teachers/students/performance/{id}",
     "HttpMethod": "DELETE",
@@ -406,6 +575,22 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ParentTeacherBridge.API.Controllers.TeachersController",
+    "Method": "GetTimetable",
+    "RelativePath": "teacher/Teachers/timetable/{teacherId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teacherId",
         "Type": "System.Int32",
         "IsRequired": true
       }

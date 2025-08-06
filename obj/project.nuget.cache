@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Q5kZ61m3dh8=",
+  "dgSpecHash": "NpXu3sR4nwg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Preeti\\OneDrive\\Desktop\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj",
+  "projectFilePath": "D:\\Projectbackup\\TeacherControllerM\\ParentTeacheMyCode\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Preeti\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\Preeti\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

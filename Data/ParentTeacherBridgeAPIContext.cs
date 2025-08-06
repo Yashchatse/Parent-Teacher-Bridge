@@ -24,12 +24,14 @@ namespace ParentTeacherBridge.API.Data
         public DbSet<ParentTeacherBridge.API.Models.Student> Student { get; set; } = default!;
         public DbSet<ParentTeacherBridge.API.Models.Parent> Parent { get; set; } = default!;
         public DbSet<ParentTeacherBridge.API.Models.Attendance> Attendance { get; set; } = default!;
+
+        public DbSet<ParentTeacherBridge.API.Models.Event> Event { get; set; } = default!;
         public DbSet<ParentTeacherBridge.API.Models.Performance> Performance { get; set; } = default!;
         public DbSet<ParentTeacherBridge.API.Models.SchoolClass> SchoolClass { get; set; } = default!;
         public DbSet<ParentTeacherBridge.API.Models.Subject> Subject { get; set; } = default!;
         public DbSet<ParentTeacherBridge.API.Models.Timetable> Timetable { get; set; } = default!;
-        public DbSet<ParentTeacherBridge.API.Models.Message> Message { get; set; } = default!;
-        public DbSet<ParentTeacherBridge.API.Models.StudentParent> StudentParent { get; set; } = default!;
+        //public DbSet<ParentTeacherBridge.API.Models.Message> Message { get; set; } = default!;
+        //public DbSet<ParentTeacherBridge.API.Models.StudentParent> StudentParent { get; set; } = default!;
         //public DbSet<ParentTeacherBridge.API.Models.Events> Events { get; set; } = default!;
         //public DbSet<Login> Login { get; set; } = default!;
     }

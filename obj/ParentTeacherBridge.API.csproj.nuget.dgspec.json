@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Preeti\\OneDrive\\Desktop\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj": {}
+    "D:\\Projectbackup\\TeacherControllerM\\ParentTeacheMyCode\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Preeti\\OneDrive\\Desktop\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj": {
+    "D:\\Projectbackup\\TeacherControllerM\\ParentTeacheMyCode\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Preeti\\OneDrive\\Desktop\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj",
+        "projectUniqueName": "D:\\Projectbackup\\TeacherControllerM\\ParentTeacheMyCode\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj",
         "projectName": "ParentTeacherBridge.API",
-        "projectPath": "C:\\Users\\Preeti\\OneDrive\\Desktop\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj",
+        "projectPath": "D:\\Projectbackup\\TeacherControllerM\\ParentTeacheMyCode\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj",
         "packagesPath": "C:\\Users\\Preeti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Preeti\\OneDrive\\Desktop\\demo\\ParentTeacherBridge.API\\obj\\",
+        "outputPath": "D:\\Projectbackup\\TeacherControllerM\\ParentTeacheMyCode\\demo\\ParentTeacherBridge.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

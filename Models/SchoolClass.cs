@@ -13,6 +13,8 @@ public partial class SchoolClass
 
     public int ClassId { get; set; }
 
+    [Required]
+    [MaxLength(50)]
     [Column("class_name")]
     public string? ClassName { get; set; }
 

@@ -33,6 +33,29 @@ namespace ParentTeacherBridge.API.DTO
             CreateMap<CreatePerformanceDto, Performance>();
             CreateMap<UpdatePerformanceDto, Performance>().ReverseMap();
 
+
+            //Attendance Mapping
+            //    CreateMap<Attendance, AttendanceDTO>().ReverseMap();
+            //    CreateMap<Attendance, CreateAttendanceDto>().ReverseMap();
+            //    CreateMap<Attendance, UpdateAttendanceDto>().ReverseMap();
+            //    CreateMap<AttendanceDTO, Attendance>();
+            //    CreateMap<AttendanceDTO, Attendance>()
+            //.ForMember(dest => dest.Date, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.Date)));
+            //    CreateMap<Attendance, AttendanceDTO>()
+            // .ForMember(dest => dest.Date, opt => opt.MapFrom(src =>
+            //     src.Date.HasValue ? src.Date.Value.ToDateTime(TimeOnly.MinValue) : default));
+
+            //Events Mapping
+            CreateMap<EventCreateDto, Event>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(_ => DateTime.UtcNow));
+
+
+            CreateMap<EventUpdateDto, Event>()
+                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(_ => DateTime.UtcNow));
+
+
+            CreateMap<EventDto, Event>().ReverseMap();
+
         }
 
     }
