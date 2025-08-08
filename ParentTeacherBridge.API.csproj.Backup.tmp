@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- Entity Framework Core -->
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+
+		<!-- Swagger (OpenAPI) -->
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="9.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.0" />
+
+		<!-- AutoMapper -->
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+
+		<!-- SignalR -->
+		<PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Optional: Folder structure placeholders -->
+		<Folder Include="Controllers\" />
+		<Folder Include="Models\" />
+		<Folder Include="Data\" />
+		<Folder Include="DTO\" />
+		<Folder Include="Hubs\" />
+		<Folder Include="Profiles\" />
+		<Folder Include="Repositories\" />
+		<Folder Include="Services\" />
+	</ItemGroup>
+
+</Project>

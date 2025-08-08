@@ -1,0 +1,6 @@
+@ParentTeacherBridge.API_HostAddress = http://localhost:5070
+
+GET {{ParentTeacherBridge.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
