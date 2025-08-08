@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Preeti\\OneDrive\\Desktop\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj": {}
+    "D:\\ProjectBackupMerged\\MergedParentTeacher\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Preeti\\OneDrive\\Desktop\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj": {
+    "D:\\ProjectBackupMerged\\MergedParentTeacher\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Preeti\\OneDrive\\Desktop\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj",
+        "projectUniqueName": "D:\\ProjectBackupMerged\\MergedParentTeacher\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj",
         "projectName": "ParentTeacherBridge.API",
-        "projectPath": "C:\\Users\\Preeti\\OneDrive\\Desktop\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj",
+        "projectPath": "D:\\ProjectBackupMerged\\MergedParentTeacher\\demo\\ParentTeacherBridge.API\\ParentTeacherBridge.API.csproj",
         "packagesPath": "C:\\Users\\Preeti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Preeti\\OneDrive\\Desktop\\demo\\ParentTeacherBridge.API\\obj\\",
+        "outputPath": "D:\\ProjectBackupMerged\\MergedParentTeacher\\demo\\ParentTeacherBridge.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -53,6 +53,14 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.0, )"
+            },
+            "BCrypt": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

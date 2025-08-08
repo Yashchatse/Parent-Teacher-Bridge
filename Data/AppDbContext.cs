@@ -445,9 +445,9 @@ public partial class AppDbContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("updated_at");
 
-            entity.HasOne(d => d.Parent).WithMany(p => p.StudentParents)
-                .HasForeignKey(d => d.ParentId)
-                .HasConstraintName("FK__student_p__paren__571DF1D5");
+            //entity.HasOne(d => d.Parent).WithMany(p => p.StudentParents)
+            //    .HasForeignKey(d => d.ParentId)
+            //    .HasConstraintName("FK__student_p__paren__571DF1D5");
 
             entity.HasOne(d => d.Student).WithMany(p => p.StudentParents)
                 .HasForeignKey(d => d.StudentId)

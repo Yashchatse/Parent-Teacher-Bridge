@@ -15,11 +15,13 @@ namespace ParentTeacherBridge.API.Repositories
             _logger = logger;
         }
 
+        // Replace all occurrences of '_context.Admin' with '_context.Set<Admin>()'
+
         public async Task<IEnumerable<Admin>> GetAllAsync()
         {
             try
             {
-                return await _context.Admin.ToListAsync();
+                return await _context.Set<Admin>().ToListAsync();
             }
             catch (Exception ex)
             {
@@ -32,7 +34,7 @@ namespace ParentTeacherBridge.API.Repositories
         {
             try
             {
-                return await _context.Admin.FindAsync(id);
+                return await _context.Set<Admin>().FindAsync(id);
             }
             catch (Exception ex)
             {
@@ -45,7 +47,7 @@ namespace ParentTeacherBridge.API.Repositories
         {
             try
             {
-                await _context.Admin.AddAsync(admin);
+                await _context.Set<Admin>().AddAsync(admin);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -59,7 +61,25 @@ namespace ParentTeacherBridge.API.Repositories
         {
             try
             {
-                _context.Admin.Update(admin);
+                var existingAdmin = await _context.Set<Admin>().FindAsync(admin.AdminId);
+                if (existingAdmin == null)
+                {
+                    throw new InvalidOperationException($"Admin with ID {admin.AdminId} not found");
+                }
+
+                // Explicitly update only the fields that should change
+                existingAdmin.Name = admin.Name;
+                existingAdmin.Email = admin.Email;
+
+                // Only update password if provided
+                if (!string.IsNullOrWhiteSpace(admin.Password))
+                {
+                    existingAdmin.Password = admin.Password;
+                }
+
+                existingAdmin.IsActive = admin.IsActive;
+
+                // SaveChanges will automatically detect and save only the changed properties
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -69,11 +89,12 @@ namespace ParentTeacherBridge.API.Repositories
             }
         }
 
+
         public async Task DeleteAsync(Admin admin)
         {
             try
             {
-                _context.Admin.Remove(admin);
+                _context.Set<Admin>().Remove(admin);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)

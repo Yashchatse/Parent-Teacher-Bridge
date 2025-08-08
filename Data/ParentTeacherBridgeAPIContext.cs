@@ -16,20 +16,20 @@ namespace ParentTeacherBridge.API.Data
         {
         }
 
-        public DbSet<ParentTeacherBridge.API.Models.Admin> Admin { get; set; } = default!;
-        public DbSet<ParentTeacherBridge.API.Models.Teacher> Teacher { get; set; } = default!;
+        public DbSet<Admin> Admin { get; set; } = default!;
+        public DbSet<Teacher> Teacher { get; set; } = default!;
+        public DbSet<Behaviour> Behaviour { get; set; } = default!;
+        public DbSet<Student> Student { get; set; } = default!;
+        public DbSet<Parent> Parent { get; set; } = default!;
+        public DbSet<Attendance> Attendance { get; set; } = default!;
+        public DbSet<Event> Event { get; set; } = default!;
+        public DbSet<Performance> Performance { get; set; } = default!;
+        public DbSet<SchoolClass> SchoolClass { get; set; } = default!;
+        public DbSet<Subject> Subject { get; set; } = default!;
+        public DbSet<Timetable> Timetable { get; set; } = default!;
 
-        public DbSet<ParentTeacherBridge.API.Models.Behaviour> Behaviour { get; set; } = default!;
-
-        public DbSet<ParentTeacherBridge.API.Models.Student> Student { get; set; } = default!;
-        public DbSet<ParentTeacherBridge.API.Models.Parent> Parent { get; set; } = default!;
-        public DbSet<ParentTeacherBridge.API.Models.Attendance> Attendance { get; set; } = default!;
-        public DbSet<ParentTeacherBridge.API.Models.Performance> Performance { get; set; } = default!;
-        public DbSet<ParentTeacherBridge.API.Models.SchoolClass> SchoolClass { get; set; } = default!;
-        public DbSet<ParentTeacherBridge.API.Models.Subject> Subject { get; set; } = default!;
-        public DbSet<ParentTeacherBridge.API.Models.Timetable> Timetable { get; set; } = default!;
-        public DbSet<ParentTeacherBridge.API.Models.Message> Message { get; set; } = default!;
-        public DbSet<ParentTeacherBridge.API.Models.StudentParent> StudentParent { get; set; } = default!;
+        public DbSet<Message> Messages { get; set; } = default!;
+        //public DbSet<ParentTeacherBridge.API.Models.StudentParent> StudentParent { get; set; } = default!;
         //public DbSet<ParentTeacherBridge.API.Models.Events> Events { get; set; } = default!;
         //public DbSet<Login> Login { get; set; } = default!;
     }

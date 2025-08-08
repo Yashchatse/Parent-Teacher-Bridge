@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ParentTeacherBridge.API.Models;
 
+[Table("behaviour")]
 public partial class Behaviour
 {
     [Key]
@@ -52,7 +53,7 @@ public partial class Behaviour
     [Column("updated_at")]
     public DateTime UpdatedAt { get; set; }
 
-    // ✅ Navigation Properties
+    // Navigation Properties
     public Student Student { get; set; }   // Links Behaviour → Student
     public Teacher Teacher { get; set; }   // Links Behaviour → Teacher
 

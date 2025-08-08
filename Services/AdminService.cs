@@ -35,7 +35,11 @@ namespace ParentTeacherBridge.API.Services
 
             existing.Name = admin.Name;
             existing.Email = admin.Email;
-            // Update other fields
+            if (!string.IsNullOrWhiteSpace(admin.Password))
+            {
+                existing.Password = admin.Password;
+            }
+            existing.IsActive = admin.IsActive ?? existing.IsActive; ;
 
             await _repo.UpdateAsync(existing);
             return true;

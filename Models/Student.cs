@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ParentTeacherBridge.API.Models;
 
@@ -20,7 +21,7 @@ public partial class Student
 
         [Required(ErrorMessage = "Date of birth is required.")]
         [Column("dob")]
-        public DateTime Dob { get; set; }
+        public DateOnly Dob { get; set; }
 
         [Required(ErrorMessage = "Gender is required.")]
         [RegularExpression("^(Male|Female|Other)$", ErrorMessage = "Gender must be Male, Female, or Other.")]
@@ -48,36 +49,20 @@ public partial class Student
 
         [Column("updated_at")]
         public DateTime UpdatedAt { get; set; }
-   
 
-//public int StudentId { get; set; }
 
-//public string? Name { get; set; }
-
-//public DateOnly? Dob { get; set; }
-
-//public string? Gender { get; set; }
-
-//public string? EnrollmentNo { get; set; }
-
-//public string? BloodGroup { get; set; }
-
-//public int? ClassId { get; set; }
-
-//public string? ProfilePhoto { get; set; }
-
-//public DateTime? CreatedAt { get; set; }
-
-//public DateTime? UpdatedAt { get; set; }
-
-public virtual ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
-
+    [JsonIgnore]
+    public virtual ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
+    [JsonIgnore]
     public virtual ICollection<Behaviour> Behaviours { get; set; } = new List<Behaviour>();
 
+    [JsonIgnore]
     public virtual SchoolClass? Class { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<Performance> Performances { get; set; } = new List<Performance>();
 
+    [JsonIgnore]
     public virtual ICollection<StudentParent> StudentParents { get; set; } = new List<StudentParent>();
 
    

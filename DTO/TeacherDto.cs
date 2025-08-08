@@ -27,13 +27,16 @@ namespace ParentTeacherBridge.API.DTO
             [StringLength(255, ErrorMessage = "Email cannot exceed 255 characters")]
             public string Email { get; set; } = string.Empty;
 
-            [Required(ErrorMessage = "Password is required")]
-            [StringLength(255, MinimumLength = 6, ErrorMessage = "Password must be between 6 and 255 characters")]
-            public string Password { get; set; } = string.Empty;
+        //[Required(ErrorMessage = "Password is required")]
+        //[StringLength(255, MinimumLength = 6, ErrorMessage = "Password must be between 6 and 255 characters")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
+ErrorMessage = "Password must be at least 8 characters long and include uppercase, lowercase, digit, and special character.")]
+        public string Password { get; set; } = string.Empty;
 
-            [StringLength(15, ErrorMessage = "Phone number cannot exceed 15 characters")]
-            [RegularExpression(@"^\d{10,15}$", ErrorMessage = "Phone number must be between 10-15 digits")]
-            public string? Phone { get; set; }
+        [StringLength(10, ErrorMessage = "Phone number cannot exceed 15 characters")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be exactly 10 digits")]
+
+        public string? Phone { get; set; }
 
             [RegularExpression(@"^(Male|Female|Other)$", ErrorMessage = "Gender must be Male, Female, or Other")]
             public string? Gender { get; set; }
@@ -63,8 +66,8 @@ namespace ParentTeacherBridge.API.DTO
             [StringLength(255, MinimumLength = 6, ErrorMessage = "Password must be between 6 and 255 characters")]
             public string? Password { get; set; }
 
-            [StringLength(15, ErrorMessage = "Phone number cannot exceed 15 characters")]
-            [RegularExpression(@"^\d{10,15}$", ErrorMessage = "Phone number must be between 10-15 digits")]
+            [StringLength(10, ErrorMessage = "Phone number cannot exceed 15 characters")]
+            [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be between 10-15 digits")]
             public string? Phone { get; set; }
 
             [RegularExpression(@"^(Male|Female|Other)$", ErrorMessage = "Gender must be Male, Female, or Other")]

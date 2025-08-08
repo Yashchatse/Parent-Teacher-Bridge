@@ -21,14 +21,18 @@ public partial class Teacher
         [Column("email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password is required.")]
-        [MinLength(6, ErrorMessage = "Password must be at least 6 characters.")]
-        [Column("password")]
+    //[Required(ErrorMessage = "Password is required.")]
+    //[MinLength(6, ErrorMessage = "Password must be at least 6 characters.")]
+    [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
+ErrorMessage = "Password must be at least 8 characters long and include uppercase, lowercase, digit, and special character.")]
+    [Column("password")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Phone number is required.")]
-        [Phone(ErrorMessage = "Invalid phone number.")]
-        [Column("phone")]
+      
+    [StringLength(10, ErrorMessage = "Phone number cannot exceed 15 characters")]
+    [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be exactly 10 digits")]
+
+    [Column("phone")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Gender is required.")]

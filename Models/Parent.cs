@@ -1,35 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
-namespace ParentTeacherBridge.API.Models;
-
-public partial class Parent
+namespace ParentTeacherBridge.API.Models
 {
-    public int ParentId { get; set; }
+    [Table("parent")]
+    public partial class Parent
+    {
+        [Column("parent_id")]
+        public int ParentId { get; set; }
 
-    public string? Name { get; set; }
+        [Column("name")]
+        public string? Name { get; set; }
 
-    public string? Email { get; set; }
+        [Column("email")]
+        public string? Email { get; set; }
 
-    public string? StudEnrollmentNo { get; set; }
+        [Column("stud_enrollment_no")]
+        public string? StudEnrollmentNo { get; set; }
 
-    public string? Phone { get; set; }
+        [Column("student_id")]
+        public int? StudentId { get; set; } //  FK pointing to Student
 
-    public string? Password { get; set; }
+        [ForeignKey("StudentId")]
+        public virtual Student? Student { get; set; } //  Navigation property
 
-    public string? Address { get; set; }
+        [Column("phone")]
+        public string? Phone { get; set; }
 
-    public string? Gender { get; set; }
+        [Column("password")]
+        [JsonIgnore]
+        public string? Password { get; set; }
 
-    public string? Occupation { get; set; }
+        [Column("address")]
+        public string? Address { get; set; }
 
-    public string? Photo { get; set; }
+        [Column("gender")]
+        public string? Gender { get; set; }
 
-    public bool? IsActive { get; set; }
+        [Column("occupation")]
+        public string? Occupation { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+        [Column("photo")]
+        public string? Photo { get; set; }
 
-    public DateTime? UpdatedAt { get; set; }
+        [Column("is_active")]
+        [JsonIgnore]
+        public bool? IsActive { get; set; }
 
-    public virtual ICollection<StudentParent> StudentParents { get; set; } = new List<StudentParent>();
+        [Column("created_at")]
+        [JsonIgnore]
+        public DateTime? CreatedAt { get; set; }
+
+        [Column("updated_at")]
+        [JsonIgnore]
+        public DateTime? UpdatedAt { get; set; }
+
+        // ❌ Removed one-to-many relationship — no longer needed
+        // public virtual ICollection<Student> Students { get; set; } = new List<Student>();
+    }
 }
