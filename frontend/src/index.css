@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+/* CSS Variables for Lighter Dark Theme */
+:root {
+   /* --background: 220 20% 92%;  Lighter background */
+ --foreground: 210 40% 18%; 
+  --card: 215 25% 32%;  /* Slightly lighter cards */
+  --card-foreground: 210 40% 98%;
+  --popover: 215 25% 32%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 65%;  /* Slightly brighter primary */
+  --primary-foreground: 215 25% 15%;
+  --secondary: 215 25% 35%;  /* Lighter secondary */
+  --secondary-foreground: 210 40% 98%;
+  --muted: 215 25% 35%;
+  --muted-foreground: 215 20.2% 75%;  /* Lighter muted text */
+  --accent: 215 25% 35%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 45%;  /* Slightly brighter destructive */
+  --destructive-foreground: 210 40% 98%;
+  --border: 215 25% 40%;  /* Lighter borders */
+  --input: 215 25% 35%;
+  --ring: 224.3 76.3% 94.1%;
+  --radius: 0.75rem;
+}
+
+/* Lighter Gradient Background */
+/* body {
+  background: linear-gradient(135deg,  #d1fae5, #dbeafe) !important;
+  background-attachment: fixed !important;
+  min-height: 100vh !important;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+} */
+
+
+.gradient-bg-soft {
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #60a5fa 100%);
+}
+
+.gradient-bg-pastel {
+  background: linear-gradient(135deg, #93c5fd 0%, #c4b5fd 50%, #93c5fd 100%);
+}
+
+.gradient-bg-warm {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #f59e0b 100%);
+}
+
+/* Updated Glass Effect for Cards */
+.glass-effect {
+  background: rgba(55, 65, 81, 0.6);  /* Lighter glass effect */
+}
+
+/* Parent Dashboard Specific Styles */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 1rem;
+}
+
+/* Lightweight animations */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.anim-fade-in { animation: fade-in 420ms ease-out both; }
+.anim-slide-up { animation: slide-up 480ms ease-out both; }
+
+/* Subtle hover lift */
+.hover-lift { transition: transform 200ms ease, box-shadow 200ms ease; }
+.hover-lift:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(16, 24, 40, 0.08); }
+
+/* Shadow utilities */
+.shadow-soft { 
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(100, 116, 139, 0.4);
+}
+
+/* Additional Parent Dashboard Styles */
+body {
+  background: linear-gradient(to right, #9966ff 0%, #ccffff 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #0f172a;
+}
+
+/* App.css styles from parent dashboard */
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Enhanced Glass Effect (even lighter) */
+.glass-effect-light {
+  background: rgba(71, 85, 105, 0.5);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Lighter Gradient Text Option */
+.gradient-text-soft {
+  background: linear-gradient(135deg, #93c5fd, #c4b5fd, #fed7aa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Pulse Glow Animation - softer glow */
+.pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.6), 0 0 30px rgba(239, 68, 68, 0.4);
+  }
+}
+
+/* Smooth Transitions */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Updated Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(71, 85, 105, 0.4);  /* Lighter track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.7);  /* Lighter thumb */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(203, 213, 225, 0.8);  /* Even lighter on hover */
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.3s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* New Animation: Gentle Float */
+.float-gentle {
+  animation: floatGentle 3s ease-in-out infinite;
+}
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Hover Effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
