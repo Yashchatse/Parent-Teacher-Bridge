@@ -1,7 +1,4 @@
-diff --git a/docs/mindmap.md b/docs/mindmap.md
---- a/docs/mindmap.md
-+++ b/docs/mindmap.md
-@@ -0,0 +1,77 @@
+
 +### Project Mind Map
 +
 +```mermaid
