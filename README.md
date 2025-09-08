@@ -114,4 +114,4 @@ npm start  # Next.js production server
 
 ## License
 
-Add your license of choice (e.g., MIT) here.
+
