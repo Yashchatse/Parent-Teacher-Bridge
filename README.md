@@ -107,11 +107,4 @@ npm start  # Next.js production server
 
 `next.config.mjs` is configured with `output: 'standalone'` to support server deployment targets.
 
-## Notes
-
-- CORS: The API is configured to allow any origin in the `AllowFrontend` CORS policy for development convenience.
-- Security: Do not commit secrets. Provide sensitive values (database connection strings, JWT keys) via environment variables or secret managers.
-
-## License
-
 
